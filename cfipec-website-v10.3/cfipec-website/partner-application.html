@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner Application | CFIPEC Global</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="layout.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+
+  <!-- Header / menu: built by menu.js -->
+  <header class="site-header" data-site-header>
+    <noscript><div class="container header-inner"><a href="index.html" class="brand">CFIPEC Global</a></div></noscript>
+  </header>
+  <script src="menu.js"></script>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">For Partners</p>
+        <h1>Partner Application</h1>
+        <p class="lead">Placeholder: one sentence explaining who should apply and what happens next.</p>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <p class="note-bar">Prototype: this form checks your answers but does not send or save anything yet.</p>
+        <div class="split">
+          <div class="form-card">
+            <form id="app-form">
+              <div class="form-grid">
+                <fieldset class="field full" style="border:0;padding:0;margin:0">
+                  <legend style="padding:0;margin-bottom:6px">I am applying as <span class="req">*</span></legend>
+                  <div class="radio-row">
+                    <label><input type="radio" name="type" value="agency" required /> Recruitment agency</label>
+                    <label><input type="radio" name="type" value="country" /> Country partner</label>
+                  </div>
+                </fieldset>
+                <label class="field full"><span>Organisation name <span class="req">*</span></span>
+                  <input type="text" name="org" required autocomplete="organization" />
+                </label>
+                <label class="field"><span>Country <span class="req">*</span></span>
+                  <input type="text" name="country" required autocomplete="country-name" />
+                </label>
+                <label class="field">Website
+                  <input type="url" name="website" placeholder="https://" autocomplete="url" />
+                </label>
+                <label class="field"><span>Contact person <span class="req">*</span></span>
+                  <input type="text" name="contact" required autocomplete="name" />
+                </label>
+                <label class="field"><span>Email <span class="req">*</span></span>
+                  <input type="email" name="email" required autocomplete="email" />
+                </label>
+                <label class="field full">Phone / WhatsApp
+                  <input type="tel" name="phone" autocomplete="tel" />
+                </label>
+                <label class="field full">Tell us about your organisation
+                  <textarea name="message"></textarea>
+                </label>
+                <label class="field full consent">
+                  <input type="checkbox" name="consent" required />
+                  <span>Placeholder: consent wording, for example agreeing to the <a class="text-link" href="coming-soon.html" data-page="privacy">Privacy Policy</a>. <span class="req">*</span></span>
+                </label>
+              </div>
+              <div class="form-actions"><button class="btn btn-primary" type="submit">Submit application</button></div>
+            </form>
+            <div id="app-done" class="form-done" hidden tabindex="-1">
+              <span class="soon-pill">Prototype</span>
+              <h2>Thank you</h2>
+              <p>Placeholder: confirmation message. In this prototype nothing was sent.</p>
+              <a class="btn btn-outline" href="index.html">Back to Home</a>
+            </div>
+          </div>
+
+          <aside class="info-card">
+            <h2>What happens next</h2>
+            <ol class="checklist">
+              <li>Placeholder: we review your application.</li>
+              <li>Placeholder: we contact you for more details.</li>
+              <li>Placeholder: you are added to the network.</li>
+            </ol>
+            <p style="margin-top:18px">Not sure which to choose? Read about
+              <a class="text-link" href="recruitment-agencies.html">Recruitment Agencies</a> or
+              <a class="text-link" href="country-partner-info.html">Country Partners</a>.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer / sitemap: built by menu.js -->
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Prototype only: checks the form, then shows a message. Nothing is stored or sent.
+    (function () {
+      var form = document.getElementById("app-form"), done = document.getElementById("app-done");
+      var t = new URLSearchParams(location.search).get("type");   // ?type=agency or ?type=country
+      var pick = form.querySelector('input[name="type"][value="' + t + '"]');
+      if (pick) pick.checked = true;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        form.hidden = true; done.hidden = false; done.focus();
+      });
+    })();
+  </script>
+</body>
+</html>

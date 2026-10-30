@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | CFIPEC Global</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="layout.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+
+  <!-- Header / menu: built by menu.js -->
+  <header class="site-header" data-site-header>
+    <noscript><div class="container header-inner"><a href="index.html" class="brand">CFIPEC Global</a></div></noscript>
+  </header>
+  <script src="menu.js"></script>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Account</p>
+        <h1>Sign Up</h1>
+        <p class="lead">Placeholder: one sentence inviting people to create an account.</p>
+      </div>
+    </section>
+    <section class="section section--alt">
+      <div class="container">
+        <p class="note-bar">Prototype: no account is created. Submitting simply shows the signed-in version of the site.</p>
+        <div class="auth-wrap"><div class="form-card">
+            <form id="signup-form" data-proto data-signin data-next="index.html">
+              <div class="form-grid">
+                <label class="field"><span>Full name <span class="req">*</span></span>
+                  <input type="text" name="name" required autocomplete="name" />
+                </label>
+                <label class="field"><span>Email <span class="req">*</span></span>
+                  <input type="email" name="email" required autocomplete="email" />
+                </label>
+                <label class="field"><span>I am a <span class="req">*</span></span>
+                  <select name="role" required><option value="">Choose...</option><option>Worker</option><option>Recruitment agency</option><option>Country partner</option></select>
+                </label>
+                <label class="field"><span>Password <span class="req">*</span></span>
+                  <input type="password" name="pw" required autocomplete="new-password" />
+                </label>
+                <label class="field"><span>Confirm password <span class="req">*</span></span>
+                  <input type="password" name="pw2" required autocomplete="new-password" />
+                </label>
+                <label class="field full consent"><input type="checkbox" name="consent" required /><span>Placeholder: consent wording, for example agreeing to the <a class="text-link" href="coming-soon.html" data-page="terms">Terms of Use</a>. <span class="req">*</span></span></label>
+              </div>
+              <div class="form-actions"><button class="btn btn-primary" type="submit">Create account</button></div>
+            </form>
+          </div>
+          <p class="auth-alt">Already have an account? <a href="coming-soon.html" data-page="login">Login</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer / sitemap: built by menu.js -->
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

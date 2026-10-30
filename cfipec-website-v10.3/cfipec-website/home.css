@@ -1,0 +1,147 @@
+/* =========================================================
+   home.css – the long Home page sections
+   (About, Vision & Mission, How It Works, Our Values, call-to-action)
+   Loads AFTER styles.css. Colours come from the variables in styles.css.
+   ========================================================= */
+
+/* ---------- Shared section layout ---------- */
+.section { padding: 88px 0; }
+.section--alt { background: var(--color-bg-alt); }
+
+/* anchor links (e.g. #about) stop just below the sticky header */
+.section, .quick-links { scroll-margin-top: var(--header-height); }
+
+.section-head { max-width: 680px; margin: 0 0 40px; }
+.section-head .eyebrow { color: var(--color-primary); }
+.section-head h2,
+.about-text .section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+.section-head p { margin: 0; color: var(--color-muted); font-size: 1.05rem; }
+
+
+.icon-badge {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(7, 82, 119, 0.10);
+  color: var(--color-primary);
+}
+.icon-badge svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- About ---------- */
+.about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+.about-text p { margin: 0 0 16px; font-size: 1.05rem; }
+.about-text .text-link { margin-top: 8px; }
+
+/* image slot: swap the inner div for  <img src="assets/images/about.jpg" alt="..."> */
+.media-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  box-shadow: 0 24px 60px rgba(20, 40, 80, 0.22);
+}
+.media-frame img { width: 100%; height: 100%; object-fit: cover; }
+.media-frame::before {
+  content: "";
+  position: absolute;
+  width: 280px; height: 280px;
+  right: -60px; top: -60px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0.35;
+  filter: blur(60px);
+}
+.media-label {
+  position: absolute;
+  left: 18px; bottom: 16px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+/* ---------- Vision & Mission (cards come from styles.css) ---------- */
+#vision-mission .info-card h2 { font-size: 1.5rem; }
+
+/* ---------- How It Works ---------- */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.step {
+  position: relative;
+  padding: 28px 22px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+.step-num {
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+}
+.step h3 { margin: 0 0 8px; font-size: 1.1rem; }
+.step p { margin: 0; color: var(--color-muted); }
+.step:not(:last-child)::after {   /* little connector to the next step */
+  content: "";
+  position: absolute;
+  top: 50px; right: -20px;
+  width: 20px; height: 2px;
+  background: var(--color-primary);
+  opacity: 0.35;
+}
+
+/* modifiers: 5 or 6 steps on one page */
+.steps--5 { grid-template-columns: repeat(5, 1fr); }
+.steps--3 { grid-template-columns: repeat(3, 1fr); }
+.steps--3 .step:nth-child(3n)::after { display: none; }
+
+/* ---------- Our Values ---------- */
+.values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.value-card {
+  padding: 28px 24px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+.value-card:hover { box-shadow: 0 8px 24px rgba(20, 40, 80, 0.10); transform: translateY(-3px); border-color: var(--color-primary); }
+.value-card h3 { margin: 0 0 8px; font-size: 1.15rem; }
+.value-card p { margin: 0; color: var(--color-muted); }
+
+/* ---------- Call-to-action band ---------- */
+.cta-band {
+  padding: 76px 0;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-primary-dark) 45%, var(--color-primary) 100%);
+}
+.cta-band h2 { margin: 0 0 12px; font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.2; }
+.cta-band p { margin: 0 auto 28px; max-width: 56ch; opacity: 0.9; }
+.cta-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px) {
+  .section { padding: 64px 0; }
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  .steps, .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .step:not(:last-child)::after { display: none; }
+}
+@media (max-width: 560px) {
+  .steps, .values-grid { grid-template-columns: 1fr; }
+}

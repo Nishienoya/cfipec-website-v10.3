@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile | CFIPEC Global</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="layout.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+
+  <!-- Header / menu: built by menu.js -->
+  <header class="site-header" data-site-header>
+    <noscript><div class="container header-inner"><a href="index.html" class="brand">CFIPEC Global</a></div></noscript>
+  </header>
+  <script src="menu.js"></script>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">For Workers</p>
+        <h1>My Profile</h1>
+        <p class="lead">Keep your consented identity, trade, experience, language and availability records in one place.</p>
+      </div>
+    </section>
+    <section class="section section--alt">
+      <div class="container">
+        <!-- Shown when signed out -->
+        <div class="gate-card" data-only="out">
+          <span class="soon-pill">Login required</span>
+          <h2>Please log in to see your profile</h2>
+          <p>Placeholder: a short line explaining that this page is only available to registered members.</p>
+          <div class="gate-actions">
+            <a class="btn btn-primary" href="coming-soon.html" data-page="login">Login</a>
+            <a class="btn btn-outline" href="coming-soon.html" data-page="signUp">Sign Up</a>
+          </div>
+          <a class="gate-preview" href="worker-profile.html?demo=signedin">Prototype: preview the signed-in view</a>
+        </div>
+
+        <div data-only="in">
+          <p class="note-bar">Prototype: all text on this page is placeholder content. Nothing here is saved or sent yet.</p>
+          <div class="form-card">
+            <div class="profile-head"><div class="avatar">Photo</div><div><strong>Placeholder: your name</strong><br><span style="color:var(--color-muted)">Placeholder: member since</span></div></div>
+            <form id="profile-form" data-proto>
+              <div class="form-grid">
+                <label class="field"><span>Full name <span class="req">*</span></span>
+                  <input type="text" name="name" required autocomplete="name" />
+                </label>
+                <label class="field"><span>Email <span class="req">*</span></span>
+                  <input type="email" name="email" required autocomplete="email" />
+                </label>
+                <label class="field"><span>Phone / WhatsApp</span>
+                  <input type="tel" name="phone" autocomplete="tel" />
+                </label>
+                <label class="field"><span>Nationality</span>
+                  <input type="text" name="nationality" />
+                </label>
+                <label class="field"><span>Country of residence</span>
+                  <input type="text" name="residence" autocomplete="country-name" />
+                </label>
+                <label class="field"><span>Languages</span>
+                  <input type="text" name="languages" />
+                </label>
+                <label class="field full"><span>Skills and experience summary</span>
+                  <textarea name="summary"></textarea>
+                </label>
+              </div>
+              <div class="form-actions"><button class="btn btn-primary" type="submit">Save profile</button></div>
+            </form>
+            <div id="profile-form-done" class="form-done" hidden tabindex="-1">
+              <span class="soon-pill">Prototype</span>
+              <h2>Profile saved</h2>
+              <p>Placeholder: confirmation message. In this prototype nothing was saved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer / sitemap: built by menu.js -->
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

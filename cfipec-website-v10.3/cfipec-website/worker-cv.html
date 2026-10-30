@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My CV | CFIPEC Global</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="layout.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+
+  <!-- Header / menu: built by menu.js -->
+  <header class="site-header" data-site-header>
+    <noscript><div class="container header-inner"><a href="index.html" class="brand">CFIPEC Global</a></div></noscript>
+  </header>
+  <script src="menu.js"></script>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">For Workers</p>
+        <h1>My CV</h1>
+        <p class="lead">Placeholder: one sentence explaining that workers build and download their CV here.</p>
+      </div>
+    </section>
+    <section class="section section--alt">
+      <div class="container">
+        <!-- Shown when signed out -->
+        <div class="gate-card" data-only="out">
+          <span class="soon-pill">Login required</span>
+          <h2>Please log in to see your CV</h2>
+          <p>Placeholder: a short line explaining that this page is only available to registered members.</p>
+          <div class="gate-actions">
+            <a class="btn btn-primary" href="coming-soon.html" data-page="login">Login</a>
+            <a class="btn btn-outline" href="coming-soon.html" data-page="signUp">Sign Up</a>
+          </div>
+          <a class="gate-preview" href="worker-cv.html?demo=signedin">Prototype: preview the signed-in view</a>
+        </div>
+
+        <div data-only="in">
+          <p class="note-bar">Prototype: all text on this page is placeholder content. Nothing here is saved or sent yet.</p>
+          <div class="split">
+            <div class="cv-list">
+          <div class="cv-block"><div><h3>Personal summary</h3><p>Placeholder: a short summary of this section.</p></div><button class="btn btn-outline btn-sm" type="button" disabled title="Prototype">Edit</button></div>
+          <div class="cv-block"><div><h3>Work experience</h3><p>Placeholder: a short summary of this section.</p></div><button class="btn btn-outline btn-sm" type="button" disabled title="Prototype">Edit</button></div>
+          <div class="cv-block"><div><h3>Education and training</h3><p>Placeholder: a short summary of this section.</p></div><button class="btn btn-outline btn-sm" type="button" disabled title="Prototype">Edit</button></div>
+          <div class="cv-block"><div><h3>Skills</h3><p>Placeholder: a short summary of this section.</p></div><button class="btn btn-outline btn-sm" type="button" disabled title="Prototype">Edit</button></div>
+          <div class="cv-block"><div><h3>Languages</h3><p>Placeholder: a short summary of this section.</p></div><button class="btn btn-outline btn-sm" type="button" disabled title="Prototype">Edit</button></div>
+            </div>
+            <aside class="info-card">
+              <h2>Your CV file</h2>
+              <div class="upload-box"><strong>Placeholder: upload an existing CV</strong><span>PDF or Word</span></div>
+              <p style="margin-top:16px"><button class="btn btn-primary" type="button" disabled title="Prototype">Download my CV</button></p>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer / sitemap: built by menu.js -->
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

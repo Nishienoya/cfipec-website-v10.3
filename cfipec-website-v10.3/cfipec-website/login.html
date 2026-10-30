@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | CFIPEC Global</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="layout.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+
+  <!-- Header / menu: built by menu.js -->
+  <header class="site-header" data-site-header>
+    <noscript><div class="container header-inner"><a href="index.html" class="brand">CFIPEC Global</a></div></noscript>
+  </header>
+  <script src="menu.js"></script>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Account</p>
+        <h1>Login</h1>
+        <p class="lead">Placeholder: one sentence welcoming members back.</p>
+      </div>
+    </section>
+    <section class="section section--alt">
+      <div class="container">
+        <p class="note-bar">Prototype: no real login. Submitting simply shows the signed-in version of the site.</p>
+        <div class="auth-wrap"><div class="form-card">
+            <form id="login-form" data-proto data-signin data-next="index.html">
+              <div class="form-grid">
+                <label class="field"><span>Email <span class="req">*</span></span>
+                  <input type="email" name="email" required autocomplete="email" />
+                </label>
+                <label class="field"><span>Password <span class="req">*</span></span>
+                  <input type="password" name="pw" required autocomplete="current-password" />
+                </label>
+              </div>
+              <div class="form-actions"><button class="btn btn-primary" type="submit">Login</button></div>
+              <p class="auth-alt"><a href="coming-soon.html?page=Forgot%20password">Forgot your password?</a></p>
+            </form>
+          </div>
+          <p class="auth-alt">New here? <a href="coming-soon.html" data-page="signUp">Sign Up</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer / sitemap: built by menu.js -->
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

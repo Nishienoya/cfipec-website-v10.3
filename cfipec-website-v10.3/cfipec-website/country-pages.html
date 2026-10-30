@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Country Pages | CFIPEC Global</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="layout.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="joborders.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+
+  <!-- Header / menu: built by menu.js -->
+  <header class="site-header" data-site-header>
+    <noscript><div class="container header-inner"><a href="index.html" class="brand">CFIPEC Global</a></div></noscript>
+  </header>
+  <script src="menu.js"></script>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Country Partners</p>
+        <h1>Country Pages</h1>
+        <p class="lead">Placeholder: one sentence explaining that each country has its own page with local partner details.</p>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <p class="note-bar">Prototype: all text on this page is placeholder content. Nothing here is saved or sent yet.</p>
+        <form class="jo-toolbar" role="search" onsubmit="return false" data-cols="2">
+          <label class="field">Search
+            <input type="search" id="pt-search" placeholder="Search countries" autocomplete="off" />
+          </label>
+          <label class="field">Region
+            <select id="pt-region"><option value="">All regions</option><option>Region A</option><option>Region B</option><option>Region C</option></select>
+          </label>
+        </form>
+        <p class="jo-count" id="pt-count" aria-live="polite">Showing 8 countries</p>
+        <div class="pt-grid pt-grid--4" id="pt-grid">
+          <a class="pt-card" href="country-template.html">
+            <h2>Placeholder: Country 1</h2>
+            <ul class="jo-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0"><li class="jo-tag">Region A</li></ul>
+            <p>Placeholder: one line about the partnership in this country.</p>
+            <span class="text-link">View country page</span>
+          </a>
+          <a class="pt-card" href="country-template.html">
+            <h2>Placeholder: Country 2</h2>
+            <ul class="jo-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0"><li class="jo-tag">Region B</li></ul>
+            <p>Placeholder: one line about the partnership in this country.</p>
+            <span class="text-link">View country page</span>
+          </a>
+          <a class="pt-card" href="country-template.html">
+            <h2>Placeholder: Country 3</h2>
+            <ul class="jo-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0"><li class="jo-tag">Region C</li></ul>
+            <p>Placeholder: one line about the partnership in this country.</p>
+            <span class="text-link">View country page</span>
+          </a>
+          <a class="pt-card" href="country-template.html">
+            <h2>Placeholder: Country 4</h2>
+            <ul class="jo-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0"><li class="jo-tag">Region A</li></ul>
+            <p>Placeholder: one line about the partnership in this country.</p>
+            <span class="text-link">View country page</span>
+          </a>
+          <a class="pt-card" href="country-template.html">
+            <h2>Placeholder: Country 5</h2>
+            <ul class="jo-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0"><li class="jo-tag">Region B</li></ul>
+            <p>Placeholder: one line about the partnership in this country.</p>
+            <span class="text-link">View country page</span>
+          </a>
+          <a class="pt-card" href="country-template.html">
+            <h2>Placeholder: Country 6</h2>
+            <ul class="jo-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0"><li class="jo-tag">Region C</li></ul>
+            <p>Placeholder: one line about the partnership in this country.</p>
+            <span class="text-link">View country page</span>
+          </a>
+          <a class="pt-card" href="country-template.html">
+            <h2>Placeholder: Country 7</h2>
+            <ul class="jo-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0"><li class="jo-tag">Region A</li></ul>
+            <p>Placeholder: one line about the partnership in this country.</p>
+            <span class="text-link">View country page</span>
+          </a>
+          <a class="pt-card" href="country-template.html">
+            <h2>Placeholder: Country 8</h2>
+            <ul class="jo-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0"><li class="jo-tag">Region B</li></ul>
+            <p>Placeholder: one line about the partnership in this country.</p>
+            <span class="text-link">View country page</span>
+          </a>
+        </div>
+        <p class="jo-empty" id="pt-empty" hidden>No countries match your search.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer / sitemap: built by menu.js -->
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Prototype search/filter: hides cards that do not match
+    (function () {
+      var box = document.getElementById("pt-search"), sel = document.getElementById("pt-region");
+      var cards = document.querySelectorAll("#pt-grid .pt-card");
+      var count = document.getElementById("pt-count"), empty = document.getElementById("pt-empty");
+      function run() {
+        var q = box.value.trim().toLowerCase(), r = sel.value.toLowerCase(), shown = 0;
+        cards.forEach(function (c) {
+          var t = c.textContent.toLowerCase();
+          var hit = (!q || t.indexOf(q) !== -1) && (!r || t.indexOf(r) !== -1);
+          c.hidden = !hit; if (hit) shown++;
+        });
+        count.textContent = "Showing " + shown + " countr" + (shown === 1 ? "y" : "ies");
+        empty.hidden = shown !== 0;
+      }
+      box.addEventListener("input", run); sel.addEventListener("change", run);
+    })();
+  </script>
+</body>
+</html>

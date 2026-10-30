@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Details | CFIPEC Global</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="layout.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+
+  <!-- Header / menu: built by menu.js -->
+  <header class="site-header" data-site-header>
+    <noscript><div class="container header-inner"><a href="index.html" class="brand">CFIPEC Global</a></div></noscript>
+  </header>
+  <script src="menu.js"></script>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Account</p>
+        <h1>Account Details</h1>
+        <p class="lead">Placeholder: one sentence explaining that this page holds the sign-in details.</p>
+      </div>
+    </section>
+    <section class="section section--alt">
+      <div class="container">
+        <!-- Shown when signed out -->
+        <div class="gate-card" data-only="out">
+          <span class="soon-pill">Login required</span>
+          <h2>Please log in to see your account</h2>
+          <p>Placeholder: a short line explaining that this page is only available to registered members.</p>
+          <div class="gate-actions">
+            <a class="btn btn-primary" href="coming-soon.html" data-page="login">Login</a>
+            <a class="btn btn-outline" href="coming-soon.html" data-page="signUp">Sign Up</a>
+          </div>
+          <a class="gate-preview" href="account-details.html?demo=signedin">Prototype: preview the signed-in view</a>
+        </div>
+
+        <div data-only="in">
+          <p class="note-bar">Prototype: all text on this page is placeholder content. Nothing here is saved or sent yet.</p>
+          <div class="split">
+            <div class="form-card"><h2 style="margin-top:0">Your details</h2>
+            <form id="details-form" data-proto>
+              <div class="form-grid">
+                <label class="field"><span>Full name <span class="req">*</span></span>
+                  <input type="text" name="name" required autocomplete="name" />
+                </label>
+                <label class="field"><span>Email <span class="req">*</span></span>
+                  <input type="email" name="email" required autocomplete="email" />
+                </label>
+                <label class="field full"><span>Phone / WhatsApp</span>
+                  <input type="tel" name="phone" autocomplete="tel" />
+                </label>
+              </div>
+              <div class="form-actions"><button class="btn btn-primary" type="submit">Save details</button></div>
+            </form>
+            <div id="details-form-done" class="form-done" hidden tabindex="-1">
+              <span class="soon-pill">Prototype</span>
+              <h2>Details saved</h2>
+              <p>Placeholder: confirmation message. In this prototype nothing was saved.</p>
+            </div>
+            </div>
+            <div class="form-card"><h2 style="margin-top:0">Change password</h2>
+            <form id="password-form" data-proto>
+              <div class="form-grid">
+                <label class="field full"><span>Current password <span class="req">*</span></span>
+                  <input type="password" name="old" required autocomplete="current-password" />
+                </label>
+                <label class="field"><span>New password <span class="req">*</span></span>
+                  <input type="password" name="new" required autocomplete="new-password" />
+                </label>
+                <label class="field"><span>Confirm new password <span class="req">*</span></span>
+                  <input type="password" name="new2" required autocomplete="new-password" />
+                </label>
+              </div>
+              <div class="form-actions"><button class="btn btn-primary" type="submit">Update password</button></div>
+            </form>
+            <div id="password-form-done" class="form-done" hidden tabindex="-1">
+              <span class="soon-pill">Prototype</span>
+              <h2>Password updated</h2>
+              <p>Placeholder: confirmation message. In this prototype nothing was saved.</p>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer / sitemap: built by menu.js -->
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | CFIPEC Global</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="layout.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+
+  <!-- Header / menu: built by menu.js -->
+  <header class="site-header" data-site-header>
+    <noscript><div class="container header-inner"><a href="index.html" class="brand">CFIPEC Global</a></div></noscript>
+  </header>
+  <script src="menu.js"></script>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Account</p>
+        <h1>Settings</h1>
+        <p class="lead">Placeholder: one sentence explaining the account settings.</p>
+      </div>
+    </section>
+    <section class="section section--alt">
+      <div class="container">
+        <!-- Shown when signed out -->
+        <div class="gate-card" data-only="out">
+          <span class="soon-pill">Login required</span>
+          <h2>Please log in to see your settings</h2>
+          <p>Placeholder: a short line explaining that this page is only available to registered members.</p>
+          <div class="gate-actions">
+            <a class="btn btn-primary" href="coming-soon.html" data-page="login">Login</a>
+            <a class="btn btn-outline" href="coming-soon.html" data-page="signUp">Sign Up</a>
+          </div>
+          <a class="gate-preview" href="account-settings.html?demo=signedin">Prototype: preview the signed-in view</a>
+        </div>
+
+        <div data-only="in">
+          <p class="note-bar">Prototype: all text on this page is placeholder content. Nothing here is saved or sent yet.</p>
+          <div class="form-card" style="max-width:720px">
+            <h2 style="margin-top:0">Notifications</h2>
+            <div class="setting-row"><div><strong>Placeholder: email updates</strong><span class="hint">Placeholder: a short explanation.</span></div><label class="switch"><input type="checkbox" checked aria-label="Placeholder: email updates" /><i></i></label></div>
+            <div class="setting-row"><div><strong>Placeholder: JOBORDER alerts</strong><span class="hint">Placeholder: a short explanation.</span></div><label class="switch"><input type="checkbox" aria-label="Placeholder: JOBORDER alerts" /><i></i></label></div>
+            <div class="setting-row"><div><strong>Placeholder: news and insights</strong><span class="hint">Placeholder: a short explanation.</span></div><label class="switch"><input type="checkbox" aria-label="Placeholder: news and insights" /><i></i></label></div>
+
+            <h2>Language</h2>
+            <label class="field" style="max-width:280px"><span>Display language</span><select><option>Placeholder: language A</option><option>Placeholder: language B</option></select></label>
+            <h2>Delete account</h2>
+            <p style="color:var(--color-muted)">Placeholder: a short warning about what deleting an account means.</p>
+            <button class="btn btn-outline" type="button" disabled title="Prototype">Delete my account</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer / sitemap: built by menu.js -->
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+/* =========================================================
+   layout.css – header menu, dropdowns, footer, "coming soon"
+   Loads AFTER styles.css. The menu content itself lives in menu.js.
+   ========================================================= */
+
+/* ---------- Skip link (keyboard / screen readers) ---------- */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 300;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.skip-link:focus { top: 10px; }
+
+/* ---------- Small button ---------- */
+.btn-sm { padding: 8px 18px; font-size: 0.9rem; }
+
+/* ---------- Desktop menu ---------- */
+.site-nav { display: flex; align-items: center; gap: 20px; height: 100%; }
+
+.nav-list { display: flex; align-items: center; gap: 2px; height: 100%; margin: 0; }
+.nav-list > li { position: relative; display: flex; align-items: center; height: 100%; }
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-link:hover,
+.nav-link.active,
+.has-sub:has(:focus-visible) > .nav-link,
+.has-sub.open-sub > .nav-link { color: var(--color-primary); background: rgba(7, 82, 119, 0.08); }
+.nav-link:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+
+.nav-more::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s;
+}
+.nav-more::after { margin-left: 8px; }
+.has-sub.open-sub > .nav-more::after { transform: rotate(225deg) translate(-1px, 0); }
+
+/* expand buttons for the phone menu: hidden on desktop, where dropdowns open on hover */
+.sub-toggle { display: none; }
+
+/* dropdown panels */
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 230px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 0 18px 48px rgba(15, 30, 60, 0.16);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  z-index: 200;
+}
+.has-sub:hover > .submenu,
+.has-sub:has(:focus-visible) > .submenu,   /* keyboard users tabbing through the menu */
+.has-sub.open-sub > .submenu { opacity: 1; visibility: visible; transform: none; }
+/* Escape pressed: stay closed until the pointer / focus leaves */
+.has-sub.dismissed > .submenu { opacity: 0; visibility: hidden; transform: translateY(8px); }
+
+.submenu a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.93rem;
+  color: var(--color-text);
+  transition: background 0.15s, color 0.15s;
+}
+.submenu a:hover,
+.submenu a:focus-visible { background: var(--color-bg-alt); color: var(--color-primary); }
+
+.submenu--right { left: auto; right: 0; min-width: 200px; }
+
+/* the wide "More" panel */
+.mega {
+  left: auto;
+  right: 0;
+  width: 560px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 20px;
+}
+.mega-group ul { margin: 2px 0 0; padding: 0; list-style: none; }
+.mega-group .mega-title {
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  padding: 8px 14px 4px;
+}
+.mega-group .mega-title:hover { background: transparent; text-decoration: underline; }
+
+/* Login / Sign up */
+.nav-account { display: flex; align-items: center; gap: 10px; padding-left: 8px; }
+
+/* ---------- Profile avatar button (signed-in state) ---------- */
+.nav-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.nav-avatar:hover,
+.nav-avatar.active,
+.has-account:has(:focus-visible) > .nav-avatar,
+.has-account.open-sub > .nav-avatar {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(7, 82, 119, 0.15);
+}
+.nav-avatar:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.avatar-icon { width: 36px; height: 36px; border-radius: 50%; display: block; }
+
+/* Profile dropdown panel */
+.profile-menu {
+  min-width: 220px;
+  padding: 10px 8px;
+}
+.profile-menu__section-label {
+  margin: 4px 0 2px;
+  padding: 4px 14px 2px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.profile-menu__divider {
+  margin: 8px 14px;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ---------- Phone / tablet menu ---------- */
+@media (max-width: 1080px) {
+  .nav-toggle { display: block; }
+
+  .site-nav {
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    height: auto;
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 10px 16px 22px;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 18px 40px rgba(15, 30, 60, 0.14);
+    display: none;
+  }
+  .site-nav.open { display: flex; }
+
+  .nav-list { flex-direction: column; align-items: stretch; height: auto; gap: 0; }
+  .nav-list > li { height: auto; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--color-border); }
+  .nav-list > li > .nav-link { flex: 1; padding: 14px 8px; border-radius: 0; background: none; }
+  .nav-list > li > .nav-more { justify-content: space-between; text-align: left; width: 100%; padding-right: 20px; }
+
+  .sub-toggle {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: var(--color-muted);
+    cursor: pointer;
+  }
+  .sub-toggle::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 0.2s;
+  }
+  .has-sub.open-sub > .sub-toggle { color: var(--color-primary); }
+  .has-sub.open-sub > .sub-toggle::before { transform: rotate(225deg) translate(-1px, 0); }
+  .sub-toggle:focus-visible { outline: 3px solid var(--color-focus); outline-offset: -3px; }
+
+  .submenu,
+  .mega {
+    position: static;
+    display: none;
+    width: 100%;
+    min-width: 0;
+    padding: 0 0 10px 12px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .has-sub.open-sub > .submenu { display: block; }
+  .has-sub.open-sub > .mega { display: grid; grid-template-columns: 1fr; gap: 6px; }
+
+  .nav-account { padding-left: 0; }
+  .nav-account .btn { flex: 1; text-align: center; padding: 12px 18px; }
+
+  /* Avatar button in mobile nav */
+  .has-account { justify-content: flex-start; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--color-border); }
+  .nav-avatar { width: 44px; height: 44px; }
+  .avatar-icon { width: 38px; height: 38px; }
+  .profile-menu { padding: 0 0 10px 12px; }
+}
+
+/* ---------- Footer / sitemap ---------- */
+.site-footer { padding: 56px 0 0; }
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 44px;
+  padding-bottom: 8px;
+}
+.footer-brand p { margin: 0; color: #9fb0c8; max-width: 30ch; }
+.footer-address {
+  font-style: normal;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #9fb0c8;
+  margin-top: 0.75rem;
+}
+.footer-address a { color: #9fb0c8; text-decoration: underline; }
+.footer-address a:hover { color: #fff; }
+
+.footer-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 28px 24px; }
+.footer-col h3 {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.footer-col ul { margin: 0; padding: 0; list-style: none; }
+.footer-col a { display: inline-block; padding: 4px 0; color: #c8d3e3; transition: color 0.15s; }
+.footer-col a:hover { color: #fff; text-decoration: underline; }
+.footer-col h3 a { color: inherit; padding: 0; }   /* headings that are links (e.g. News & Insights) */
+
+.footer-bottom { margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.12); padding: 20px 0; }
+.footer-legal { display: flex; gap: 20px; }
+
+@media (max-width: 900px) {
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* ---------- "Coming soon" page ---------- */
+.soon { padding: 72px 0 96px; background: var(--color-bg-alt); min-height: 52vh; }
+.soon-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 36px;
+  text-align: center;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(15, 30, 60, 0.06);
+}
+.soon-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  background: rgba(0, 173, 239, 0.16);
+  color: var(--color-primary-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.soon-card h2 { margin: 0 0 10px; font-size: 1.6rem; color: var(--color-primary); }
+.soon-card p { margin: 0 0 26px; color: var(--color-muted); }
+.soon-card .btn-outline { margin-left: 8px; }
+@media (max-width: 480px) { .soon-card .btn-outline { margin: 10px 0 0; } }
+
+/* ---------- Logo ---------- */
+.brand img { height: 64px; width: auto; }
+.brand .logo-light { display: none; }
+/* Over the dark hero (glass header at rest) show the light-lettered logo; once the header turns white, the dark one */
+.site-header--glass:not(:hover):not(:has(:focus-visible)):not(:has(.site-nav.open)):not(.is-scrolled) .brand .logo-light { display: block; }
+.site-header--glass:not(:hover):not(:has(:focus-visible)):not(:has(.site-nav.open)):not(.is-scrolled) .brand .logo-dark { display: none; }
+
+.footer-logo { height: 80px; width: auto; margin-bottom: 12px; }
+
+/* JobOrders logo at the top of the JobOrders page banners */
+.hero-logo { height: 52px; width: auto; margin: 0 0 18px; }
+
+/* ---------- Show / hide by sign-in state (prototype) ----------
+   <div data-only="in"> shows only when signed in, data-only="out" only when signed out. */
+.is-signed-in [data-only="out"],
+.is-signed-out [data-only="in"] { display: none !important; }

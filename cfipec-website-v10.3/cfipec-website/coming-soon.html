@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming soon | CFIPEC Global</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="layout.css" />
+</head>
+<body>
+
+  <header class="site-header" data-site-header>
+    <noscript><div class="container header-inner"><a href="index.html" class="brand">CFIPEC Global</a></div></noscript>
+  </header>
+  <script src="menu.js"></script>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Coming soon</p>
+        <h1 id="soon-name">This page</h1>
+      </div>
+    </section>
+
+    <section class="soon">
+      <div class="container">
+        <div class="soon-card">
+          <span class="soon-pill">In progress</span>
+          <h2>We're still building this page</h2>
+          <p>
+            This page is part of the planned site and will be added in an upcoming phase.
+            In the meantime, you can explore the rest of the site.
+          </p>
+          <a class="btn btn-primary" href="index.html">Back to Home</a>
+          <a class="btn btn-outline" href="index.html#how-it-works">How It Works</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Show the name of the page that was clicked (from coming-soon.html?page=Name)
+    (function () {
+      var name = new URLSearchParams(location.search).get("page");
+      if (!name) return;
+      name = name.slice(0, 80);
+      document.getElementById("soon-name").textContent = name;   // textContent = safe, no HTML
+      document.title = name + " | CFIPEC Global";
+    })();
+  </script>
+</body>
+</html>

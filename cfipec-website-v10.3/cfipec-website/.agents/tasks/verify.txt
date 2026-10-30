@@ -1,0 +1,117 @@
+=========================================================
+VERIFY.txt — CFIPEC "remove For Workers nav / feature JobOrders"
+=========================================================
+Date: 2026-10-30
+Method: static verification via ripgrep (grep_search) + directory listing.
+        The shell/terminal in this environment is BROKEN — every
+        PowerShell command, including trivial probes like
+        `Write-Output "probe-ok"`, returns exit code -1 with NO
+        captured output. Therefore the live HTTP-serve + DOM-inspect
+        step could NOT be executed (same wall the workflow coder hit).
+        See "KNOWN LIMITATION" below.
+
+----------------------------------------------------------
+1. "For Workers" nav item removed (pre-sign-in)
+----------------------------------------------------------
+PASS — No menu `to:` target references any worker page:
+  grep menu.js `to: "(worker|careerPathway|myJobOrders|browseJobOrders)`
+  -> only match is `{ label: "JOBORDERS", to: "browseJobOrders", children: [] }`,
+     and browseJobOrders resolves to the EXTERNAL url
+     (browseJobOrders.file = JOBORDERS_URL = https://joborders.cfipec.org),
+     so it is an external leaf, not a worker-page link.
+  No `to: "worker*"`, `to: "careerPathway"`, or `to: "myJobOrders"` targets exist.
+
+PASS — Signed-in "My Worker Profile" group fully removed:
+  grep menu.js `My Worker Profile|workerKeys|workerItems` -> no matches.
+
+NOTE (non-functional, harmless): The literal string "For Workers" still
+  appears in two COMMENTS in menu.js (a section header above the PAGES
+  entries, and a note explaining the move), and the PAGES dictionary
+  still carries the worker/career/myJobOrders data entries. Per the design
+  review these entries are no longer referenced by MAIN, MORE,
+  accountMenu(), or the footer, so NO link is generated to them from any
+  reachable page. (Optional cleanup: rewrite the comments / drop the
+  unused PAGES entries. Not required for correctness.)
+
+----------------------------------------------------------
+2. JOBORDERS nav/footer externalized
+----------------------------------------------------------
+PASS — menu.js: `const JOBORDERS_URL = "https://joborders.cfipec.org";`
+       browseJobOrders -> JOBORDERS_URL; isExternal()/extAttrs() stamp
+       target=_blank rel="noopener noreferrer" + "(opens in a new tab)"
+       aria-label + visually-hidden cue on external hrefs.
+
+----------------------------------------------------------
+3. JobOrders featured on the landing page (index.html)
+----------------------------------------------------------
+PASS — New `#joborders` section present (section section--alt, id="joborders")
+  with eyebrow, section-title, description, `.jo-feature-list` (3 items),
+  CTA button ("Go to JOBORDERS" -> external), and `.jo-feature-logo`
+  containing `<img src="assets/images/JOBORDERS_logo_light.png" alt="JOBORDERS logo" />`.
+PASS — Quick-links reduced to two cards: `cards cards--2` with a JOBORDERS
+  card (external) + a "For Partners" card. The "For Workers" card is gone.
+PASS — Hero + bottom CTA "Learn About JOBORDERS" buttons repointed at
+  https://joborders.cfipec.org (external, new tab).
+
+----------------------------------------------------------
+4. CSS (home.css) — no new framework/build
+----------------------------------------------------------
+PASS — home.css adds vanilla rules only:
+  `.jo-feature-list` / `.jo-feature-list li` / `.jo-feature-list li::before`
+  `.jo-feature-logo` (+ img, + ::after), `.cards--2` with an 820px breakpoint
+  and a 980px logo tweak. Uses existing custom properties; no framework.
+
+----------------------------------------------------------
+5. Accessibility (review finding #2) — RESOLVED
+----------------------------------------------------------
+PASS — The JOBORDERS quick-link card anchor has NO aria-label; it exposes
+  its full accessible name from its <h2> + descriptive <p>, and adds
+  `<span class="visually-hidden">Opens in a new tab</span>`. This matches
+  the reviewer's recommended fix, so the descriptive sentence is still
+  announced by screen readers.
+  Short-text external links (hero, feature CTA, bottom CTA, nav, footer)
+  retain an "(opens in a new tab)" aria-label, which is appropriate because
+  they have no descriptive sentence to lose. The logo <img> has alt text.
+
+----------------------------------------------------------
+6. Worker pages unlinked but kept on disk
+----------------------------------------------------------
+PASS — No REACHABLE page links to any of the six worker pages.
+  grep **/*.html for the worker-page basenames returned matches ONLY inside
+  the six orphaned worker files themselves (self-referential ?demo=signedin
+  preview links + cross-links among browse-joborders / career-pathway /
+  worker-certification / my-joborders). No match in index.html,
+  iso-17024.html, country-template.html, or any other reachable page.
+  (These intra-orphan links are out of scope per the review; they only
+  matter if those pages are ever re-linked.)
+
+PASS — All six worker files still present on disk (directory listing):
+  browse-joborders.html, career-pathway.html, my-joborders.html,
+  worker-certification.html, worker-cv.html, worker-profile.html
+
+----------------------------------------------------------
+KNOWN LIMITATION — live serve + DOM-inspect NOT run
+----------------------------------------------------------
+The required browser smoke test (python -m http.server + DOM inspection of
+the rendered nav / profile menu / #joborders section) could NOT be
+executed: the PowerShell terminal in this environment returns exit code -1
+with no output for every command, including a bare `Write-Output "probe-ok"`.
+This is an environment/terminal-capture fault, not a code defect. The
+static (ripgrep + file-read) checks above all pass and corroborate the
+final on-disk state, but they do not exercise runtime rendering of the
+JS-generated nav/profile menu.
+
+RECOMMENDED MANUAL CHECK (once the terminal is restored, or in the user's
+own browser): open index.html directly, confirm (a) signed-out nav has no
+"For Workers" item and the JOBORDERS item opens https://joborders.cfipec.org
+in a new tab; (b) the #joborders feature section renders with the light logo
+on the gradient panel and a responsive two-card quick-links row; (c) after
+toggling the signed-in demo state, the profile avatar dropdown shows only
+the Account group (no "My Worker Profile" group). Swap the placeholder
+https://joborders.cfipec.org for the real JOBORDERS URL when known.
+
+=========================================================
+SUMMARY: 8/8 static checks PASS. 1 runtime check BLOCKED by a broken
+terminal (environment fault), not by the code. Recommend a manual browser
+smoke test before shipping.
+=========================================================

@@ -42,6 +42,10 @@
 
   const SITE_NAME = "CFIPEC Global";
 
+  // External JOBORDERS platform — workers manage certification, CV, profile and job orders there.
+  // Placeholder URL: swap for the real address once the platform is live.
+  const JOBORDERS_URL = "https://joborders.cfipec.org";
+
   // ---------- Every page on the site ----------
   // file: null  → opens "Coming soon" (coming-soon.html) until you build the page
   const PAGES = {
@@ -53,7 +57,7 @@
     values:              { title: "Our Values",            file: "index.html#values" },
 
     // JOBORDERS
-    browseJobOrders:     { title: "JOBORDERS",             file: "browse-joborders.html" },
+    browseJobOrders:     { title: "JOBORDERS",             file: JOBORDERS_URL },
     myJobOrders:         { title: "My JOBORDERS",          file: "my-joborders.html" },
 
     // Country Partners
@@ -96,12 +100,11 @@
 
   // ---------- The menu ----------
   // label = text shown, to = page opened when the label is clicked, children = dropdown items
-  // "For Workers" is hidden after login – those pages live in the profile avatar dropdown instead.
+  // "For Workers" moved to the JOBORDERS platform; worker pages are unlinked but kept on disk.
   const MAIN = [
     { label: "Home",             to: "home",            children: ["about", "visionMission", "howItWorks", "values"] },
-    { label: "JOBORDERS",        to: "browseJobOrders", children: ["browseJobOrders", "careerPathway"] },
+    { label: "JOBORDERS",        to: "browseJobOrders", children: [] },
     { label: "Country Partners", to: "globalNetwork",   children: ["globalNetwork", "countryPages"] },
-    ...(!SIGNED_IN ? [{ label: "For Workers", to: "workerProfile", children: ["workerProfile", "workerCv", "workerCertification"] }] : []),
     { label: "For Partners",     to: "recruitmentAgencies", children: ["recruitmentAgencies", "countryPartnerInfo", "partnerApplication"] }
   ];
 
@@ -117,6 +120,9 @@
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
+
+  function isExternal(u) { return /^https?:\/\//i.test(String(u)); }
+  function extAttrs(u) { return isExternal(u) ? ' target="_blank" rel="noopener noreferrer"' : ""; }
 
   function url(key) {
     const p = PAGES[key];
@@ -143,8 +149,12 @@
   // ---------- Header ----------
   function navItem(item) {
     const active = isHere(item);
-    const label = '<a class="nav-link' + (active ? " active" : "") + '" href="' + url(item.to) + '"' +
-      (active ? ' aria-current="page"' : "") + ">" + esc(item.label) + "</a>";
+    const href = url(item.to);
+    const ext = isExternal(href);
+    const cue = ext ? ' <span aria-hidden="true">↗</span>' : "";
+    const aria = ext ? ' aria-label="' + esc(item.label) + ' (opens in a new tab)"' : "";
+    const label = '<a class="nav-link' + (active ? " active" : "") + '"' + aria + ' href="' + href + '"' +
+      (active ? ' aria-current="page"' : "") + extAttrs(href) + ">" + esc(item.label) + cue + "</a>";
     if (!item.children.length) return "<li>" + label + "</li>";
     // The little arrow button is only shown in the phone/tablet menu (layout.css),
     // where there is no hover. On desktop the dropdown opens on hover or keyboard focus.
@@ -179,9 +189,8 @@
   // Signed in: a profile-avatar dropdown at the end of the menu
   function accountMenu() {
     if (!SHOW_ACCOUNT || !SIGNED_IN) return "";
-    const workerKeys = ["workerProfile", "workerCv", "workerCertification", "careerPathway"];
     const accountKeys = ["accountProfile", "accountSettings"];
-    const active = workerKeys.concat(accountKeys).some((k) => fileOf(k) === here);
+    const active = accountKeys.some((k) => fileOf(k) === here);
 
     const avatarSvg =
       '<svg class="avatar-icon" viewBox="0 0 36 36" aria-hidden="true" focusable="false">' +
@@ -190,7 +199,6 @@
         '<path d="M6 32c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff"/>' +
       '</svg>';
 
-    const workerItems = workerKeys.map((k) => "<li>" + link(k) + "</li>").join("");
     const accountItems = accountKeys.map((k) => "<li>" + link(k) + "</li>").join("");
 
     return '<li class="has-sub has-account">' +
@@ -198,14 +206,8 @@
         avatarSvg +
       "</button>" +
       '<div class="submenu submenu--right profile-menu">' +
-        '<p class="profile-menu__section-label">My Worker Profile</p>' +
-        '<ul>' + workerItems + '</ul>' +
-        '<hr class="profile-menu__divider">' +
         '<p class="profile-menu__section-label">Account</p>' +
-        '<ul>' +
-          accountItems +
-          '<li><a href="index.html" data-logout>Log out</a></li>' +
-        '</ul>' +
+        '<ul>' + accountItems + '<li><a href="index.html" data-logout>Log out</a></li></ul>' +
       '</div>' +
     '</li>';
   }
@@ -289,15 +291,18 @@
     const groups = MAIN.concat(MORE.filter((g) => g.label !== "Legal"));
     const cols = groups.map((g) => {
       if (!g.children.length) {
-        return '<div class="footer-col"><h3><a href="' + url(g.to) + '">' + esc(g.label) + "</a></h3></div>";
+        const h = url(g.to);
+        const ext = isExternal(h);
+        const cue = ext ? ' <span aria-hidden="true">↗</span>' : "";
+        const aria = ext ? ' aria-label="' + esc(g.label) + ' (opens in a new tab)"' : "";
+        return '<div class="footer-col"><h3><a href="' + h + '"' + aria + extAttrs(h) + ">" + esc(g.label) + cue + "</a></h3></div>";
       }
       return '<div class="footer-col"><h3>' + esc(g.label) + "</h3><ul>" +
         g.children.map((k) => "<li>" + link(k) + "</li>").join("") + "</ul></div>";
     });
     if (SHOW_ACCOUNT) {
       const items = SIGNED_IN
-        ? "<li>" + link("workerProfile") + "</li><li>" + link("workerCv") + "</li><li>" + link("workerCertification") + "</li><li>" + link("careerPathway") + "</li>" +
-          "<li>" + link("accountProfile") + "</li><li>" + link("accountSettings") + '</li><li><a href="index.html" data-logout>Log out</a></li>'
+        ? "<li>" + link("accountProfile") + "</li><li>" + link("accountSettings") + '</li><li><a href="index.html" data-logout>Log out</a></li>'
         : "<li>" + link("signUp") + "</li><li>" + link("login") + "</li>";
       cols.push('<div class="footer-col"><h3>Account</h3><ul>' + items + "</ul></div>");
     }

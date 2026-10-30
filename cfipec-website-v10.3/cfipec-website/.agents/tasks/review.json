@@ -1,0 +1,22 @@
+{
+  "verdict": "CHANGES_REQUESTED",
+  "findings": [
+    {
+      "id": 1,
+      "title": "Stale/invalid verification evidence",
+      "severity": "blocking",
+      "confidence": "confirmed",
+      "issue": "The required verify.txt does not exist. The closest artifact, _verify_out.txt, was captured mid-implementation: it reports every affirmative marker of the new JobOrders landing feature as absent (id=\"joborders\", joborders.cfipec.org, cards--2, JOBORDERS_logo_light.png, const JOBORDERS_URL, function isExternal all read False), contradicting the final code which contains them (verified by reading index.html and menu.js directly). Its removal markers correctly read gone. The verification script (_verify_all.ps1) only serves over HttpListener and regex-matches response bodies — it has no DOM-inspect step, and the task required serve + DOM inspect + grep.",
+      "action": "Re-run verification (serve + DOM inspect + grep) against the final files and record valid, passing evidence in .agents/tasks/verify.txt."
+    },
+    {
+      "id": 2,
+      "title": "Card aria-label drops its description",
+      "severity": "non-blocking",
+      "confidence": "confirmed",
+      "issue": "The JOBORDERS quick-link card in index.html sets aria-label=\"JOBORDERS (opens in a new tab)\" on a link that wraps an <h2> plus a descriptive <p>. Per ARIA, a present aria-label replaces the accessible name derived from contents, so the sentence 'Learn how to register, get certified, and apply for international employment opportunities.' is no longer announced. The original internal card had no aria-label and exposed the full description; this is a small screen-reader information regression on that one card. The short-text external links (nav, hero, CTA, feature CTA, footer) are unaffected.",
+      "action": "Drop the aria-label on the card and convey the new-tab hint via a visually-hidden '(opens in a new tab)' span, or fold the description into the aria-label (e.g. 'JOBORDERS — Learn how to register, get certified, and apply for international employment opportunities (opens in a new tab)')."
+    }
+  ],
+  "reviewDoc": "c:/WEBDEV/cfipec-website-v10.3/cfipec-website-v10.3/cfipec-website/.agents/tasks/review.md"
+}

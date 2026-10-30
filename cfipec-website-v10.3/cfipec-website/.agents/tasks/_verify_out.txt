@@ -1,0 +1,26 @@
+START 2026-10-30T10:49:20.8407685+08:00
+
+=== HTTP serve test (HttpListener, port 8737) ===
+[200] index.html
+[200] menu.js
+[200] home.css
+[200] iso-17024.html
+[200] country-template.html
+[200] assets/images/JOBORDERS_logo_light.png
+
+=== index.html static markers ===
+jo-feature section id=joborders present : False
+external JOBORDERS url present          : False
+cards--2 quick-links present            : False
+JOBORDERS_logo_light img present        : False
+For Workers card GONE                   : True
+
+=== menu.js static markers ===
+JOBORDERS_URL defined           : False
+isExternal helper present       : False
+For Workers MAIN entry GONE      : True
+workerKeys variable GONE        : True
+workerItems variable GONE       : True
+'My Worker Profile' label GONE   : True
+
+END 2026-10-30T10:51:23.2808934+08:00
